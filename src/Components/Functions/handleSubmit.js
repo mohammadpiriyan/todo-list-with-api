@@ -2,6 +2,8 @@ import EditData from "./EditData";
 import RenderUi from "./RenderUi";
 import { changeEditingFlag, isEditing } from "../../App";
 import { targetid } from "./EditData";
+import { PostData } from "./PostData";
+import { PutData } from "./putData";
 // const AddData = (e) => {
 //   let datalist = JSON.parse(localStorage.getItem("datalist")) || [];
 //   e.preventDefault();
@@ -35,12 +37,14 @@ const handleSubmit = (e) => {
       id: crypto.randomUUID(),
     };
     datalist.push(formData);
+    PostData(formData);
+
     localStorage.setItem("datalist", JSON.stringify(datalist));
     RenderUi(datalist);
-    console.log(e.target.Task);
+    // console.log(e.target.Task);
     form.reset();
   }
-  console.log(e.target.Task);
+  // console.log(e.target.Task);
   if (
     e.target.Task.value == "" ||
     e.target.Priority.value == "" ||
@@ -50,17 +54,19 @@ const handleSubmit = (e) => {
     return;
 
   if (isEditing) {
-    console.log(datalist);
+    // console.log(datalist);
     datalist = datalist.map((itemdata) => {
       if (itemdata.id === targetid) {
-        console.log(targetid);
+        // console.log(targetid);
         itemdata.Task = taskNameInput.value;
         itemdata.Priority = PriorityInput.value;
         itemdata.Status = StatusInput.value;
         itemdata.Date = DateInput.value;
       }
+      PutData(itemdata.id, itemdata);
       return itemdata;
     });
+
     RenderUi(datalist);
     localStorage.setItem("datalist", JSON.stringify(datalist));
     changeEditingFlag();

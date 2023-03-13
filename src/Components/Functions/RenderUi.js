@@ -4,6 +4,7 @@ import EditData from "./EditData";
 import openModal from "../Modal/openModal";
 import { changeEditingFlag } from "../../App";
 import { isEditing } from "../../App";
+
 const Priority = {
   Low: "bg-gray-200 text-gray-800",
   Medium: "bg-yellow-300 text-gray-800",

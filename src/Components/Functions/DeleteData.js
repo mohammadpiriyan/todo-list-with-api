@@ -1,4 +1,5 @@
 import RenderUi from "./RenderUi";
+import { deleteData } from "./DeletData";
 
 const DeleteData = (e) => {
   let datalist = JSON.parse(localStorage.getItem("datalist")) || [];
@@ -6,6 +7,7 @@ const DeleteData = (e) => {
   e.preventDefault();
   const id = e.target.parentElement.id;
   let newlist = datalist.filter((itemdata) => {
+    deleteData(id);
     return itemdata.id !== id;
   });
   datalist = newlist;

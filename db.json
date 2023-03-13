@@ -1,0 +1,37 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "tasks": [
+    {
+      "Task": "reza",
+      "Priority": "Medium",
+      "Status": "Done",
+      "Date": "2023-03-09",
+      "Detail": "Detail",
+      "id": "be44ffe0-32c5-46c5-b003-ae67778cbe6d"
+    },
+    {
+      "Task": "saeed",
+      "Priority": "Medium",
+      "Status": "Done",
+      "Date": "2023-03-04",
+      "Detail": "11111",
+      "id": "cca727f9-7d26-4682-a0f9-e06c4daabd43"
+    }
+  ]
+}
