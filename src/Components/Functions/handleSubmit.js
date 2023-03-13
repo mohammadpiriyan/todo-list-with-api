@@ -62,6 +62,7 @@ const handleSubmit = (e) => {
         itemdata.Priority = PriorityInput.value;
         itemdata.Status = StatusInput.value;
         itemdata.Date = DateInput.value;
+        itemdata.Detail = DetailInput.value;
       }
       PutData(itemdata.id, itemdata);
       return itemdata;
