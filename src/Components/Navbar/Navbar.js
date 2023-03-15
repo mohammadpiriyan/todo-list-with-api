@@ -4,6 +4,7 @@ import openModal from "../Modal/openModal";
 import { isEditing } from "../../App";
 import { changeEditingFlag } from "../../App";
 import openFilter from "./../Filter/openFilter";
+import { search } from "../Functions/search";
 
 const Navbar = () => {
   return El({
@@ -40,6 +41,13 @@ const Navbar = () => {
           Input({
             element: "input",
             variant: "search",
+            id: "searchInput",
+            eventListener: [
+              {
+                event: "keyup",
+                callback: search,
+              },
+            ],
           }),
           El({
             element: "button",

@@ -4,6 +4,7 @@ import AddData from "../Functions/AddData";
 import handleSubmit from "../Functions/handleSubmit";
 import RenderUi from "../Functions/RenderUi";
 import closeFilter from "./openFilter";
+import { filterHandler } from "../Functions/filterHandler";
 
 const filter = () => {
   return El({
@@ -38,7 +39,8 @@ const filter = () => {
           }),
           El({
             element: "form",
-            onchange: filterHandler(),
+            id: "formFilter",
+            onchange: filterHandler,
             className: "flex flex-col p-2 gap-4",
             child: [
               El({
@@ -112,18 +114,11 @@ const filter = () => {
                 child: "Deadline:",
               }),
               El({
-                element: "select",
+                element: "input",
                 className: "w-full rounded p-2 border",
-                name: "Deadline",
+                name: "Date",
                 id: "DeadlineFilter",
-                child: [
-                  El({
-                    element: "option",
-                    value: "All",
-                    selected: true,
-                    child: "All",
-                  }),
-                ],
+                type: "date",
               }),
             ],
           }),
