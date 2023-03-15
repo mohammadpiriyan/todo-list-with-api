@@ -3,7 +3,7 @@ import Input from "../input/input";
 import openModal from "../Modal/openModal";
 import { isEditing } from "../../App";
 import { changeEditingFlag } from "../../App";
-
+import openFilter from "./../Filter/openFilter";
 
 const Navbar = () => {
   return El({
@@ -44,6 +44,9 @@ const Navbar = () => {
           El({
             element: "button",
             className: "text-white-me",
+            onclick: () => {
+              openFilter();
+            },
             child: [
               El({
                 element: "img",

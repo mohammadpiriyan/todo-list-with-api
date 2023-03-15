@@ -4,6 +4,8 @@ import { changeEditingFlag, isEditing } from "../../App";
 import { targetid } from "./EditData";
 import { PostData } from "./PostData";
 import { PutData } from "./putData";
+import { getData } from "./getData";
+import { data } from "autoprefixer";
 // const AddData = (e) => {
 //   let datalist = JSON.parse(localStorage.getItem("datalist")) || [];
 //   e.preventDefault();
@@ -25,8 +27,8 @@ import { PutData } from "./putData";
 const handleSubmit = (e) => {
   let form = document.getElementById("form");
   e.preventDefault();
-  let datalist = JSON.parse(localStorage.getItem("datalist")) || [];
-
+  // let datalist = getData();
+  console.log(isEditing);
   if (!isEditing) {
     const formData = {
       Task: e.target.Task.value,
@@ -36,42 +38,55 @@ const handleSubmit = (e) => {
       Detail: DetailInput.value,
       id: crypto.randomUUID(),
     };
-    datalist.push(formData);
-    PostData(formData);
+    // datalist = datalist.then((response) => {
+    //   return response.push(formData);
+    // });
+    PostData(formData).then(() => {
+      getData().then((data) => RenderUi(data));
+    });
+    // localStorage.setItem("datalist", JSON.stringify(datalist));
 
-    localStorage.setItem("datalist", JSON.stringify(datalist));
-    RenderUi(datalist);
+    // RenderUi(datalist);
     // console.log(e.target.Task);
     form.reset();
   }
   // console.log(e.target.Task);
-  if (
-    e.target.Task.value == "" ||
-    e.target.Priority.value == "" ||
-    e.target.Status.value == "" ||
-    DateInput.value == ""
-  )
-    return;
+  // if (
+  //   e.target.Task.value == "" ||
+  //   e.target.Priority.value == "" ||
+  //   e.target.Status.value == "" ||
+  //   DateInput.value == ""
+  // )
+  //   return;
 
   if (isEditing) {
     // console.log(datalist);
-    datalist = datalist.map((itemdata) => {
-      if (itemdata.id === targetid) {
-        // console.log(targetid);
-        itemdata.Task = taskNameInput.value;
-        itemdata.Priority = PriorityInput.value;
-        itemdata.Status = StatusInput.value;
-        itemdata.Date = DateInput.value;
-        itemdata.Detail = DetailInput.value;
-      }
-      PutData(itemdata.id, itemdata);
-      return itemdata;
-    });
+    console.log(taskNameInput.value);
+    getData()
+      .then((response) => {
+        response = response.map((itemdata) => {
+          // console.log(response);
+          if (itemdata.id === targetid) {
+            console.log(itemdata.Task, taskNameInput.value);
+            itemdata.Task = taskNameInput.value;
+            itemdata.Priority = PriorityInput.value;
+            itemdata.Status = StatusInput.value;
+            itemdata.Date = DateInput.value;
+            itemdata.Detail = DetailInput.value;
+            PutData(itemdata.id, itemdata);
+          }
+          return itemdata;
+        });
+        return response;
+      })
+      .then((response) => {
+        RenderUi(response);
+        form.reset();
+      });
 
-    RenderUi(datalist);
-    localStorage.setItem("datalist", JSON.stringify(datalist));
+    // RenderUi(datalist);
+    // localStorage.setItem("datalist", JSON.stringify(datalist));
     changeEditingFlag();
-    form.reset();
   }
 
   // const taskNameInput = document.getElementById("taskNameInput");

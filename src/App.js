@@ -3,6 +3,7 @@ import El from "./library/El";
 import Navbar from "./Components/Navbar/Navbar";
 import Table from "./Components/Table/Table";
 import Modal from "./Components/Modal/Modal";
+import filter from "./Components/Filter/Filter";
 // API==================
 // export let BASE_URL = "http://localhost:3002";
 // let dbApi = getData(BASE_URL, "users");
@@ -16,7 +17,7 @@ export const App = () => {
   const app = El({
     element: "div",
     className: "flex flex-col",
-    child: [Navbar(), Table(), Modal()],
+    child: [Navbar(), Table(), Modal(), filter()],
   });
   return Container(app);
 };

@@ -20,6 +20,7 @@ const RenderUi = (data) => {
   const tbody = document.getElementById("tbodyTable");
   tbody.innerHTML = "";
   data.map((item) => {
+    console.log(item.id);
     const row = El({
       element: "tr",
       child: [

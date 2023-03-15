@@ -1,4 +1,6 @@
+import { getData, getDataForEdit } from "./getData";
 import RenderUi from "./RenderUi";
+import { data } from "autoprefixer";
 export let targetid;
 
 const EditData = (e) => {
@@ -8,16 +10,20 @@ const EditData = (e) => {
   const DateInput = document.getElementById("DateInput");
   const DetailInput = document.getElementById("DetailInput");
   const form = document.getElementById("form");
-  let datalist = JSON.parse(localStorage.getItem("datalist")) || [];
   targetid = e.target.parentElement.id;
-  let addform = datalist.find((itemdata) => {
-    return itemdata.id == targetid;
+  console.log(targetid);
+
+  getDataForEdit(targetid).then((data) => {
+    taskNameInput.value = data.Task;
+    PriorityInput.value = data.Priority;
+    StatusInput.value = data.Status;
+    DateInput.value = data.Date;
+    DetailInput.value = data.Detail;
   });
-  taskNameInput.value = addform.Task;
-  PriorityInput.value = addform.Priority;
-  StatusInput.value = addform.Status;
-  DateInput.value = addform.Date;
-  DetailInput.value = addform.Detail;
+  // let datalist = JSON.parse(localStorage.getItem("datalist")) || [];
+  // let addform = datalist.find((itemdata) => {
+  //   return itemdata.id == targetid;
+  // });
 };
 
 export default EditData;
